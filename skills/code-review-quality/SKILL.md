@@ -1,93 +1,68 @@
 ---
 name: code-review-quality
-description: Review a diff, PR, commit, or generated code for correctness, scope, tests, maintainability, and merge risk. Use before merge or when asked to evaluate code quality.
+description: Compatibility adapter for legacy code review requests. Use when a user asks for code-review-quality, PR review, diff review, commit review, generated code review, or merge readiness; route the review through review-router, required review gates, and review-final-merge-gate instead of performing every review concern in one skill.
 ---
 
-# Code Review & Quality
+# Code Review Quality Adapter
 
 ## Goal
 
-Decide whether the change is safe to merge and identify concrete required fixes.
+Preserve the old `code-review-quality` entry point while delegating real review work to focused gates.
 
 ## Use when
 
 - Reviewing a PR, diff, commit, patch, or generated code.
 - Deciding whether a change is safe to merge.
-- Evaluating implementation quality, test coverage, scope, or risk.
+- A prompt or project instruction explicitly names `code-review-quality`.
+- Older workflow docs or agents still call this skill.
 
 ## Do not use when
 
 - The user only asks for a non-evaluative summary.
 - No code, diff, or concrete design artifact is available to review.
-
-## Review stance
-
-Be specific. Do not produce generic style advice. Every finding needs evidence.
-
-## Severity
-
-| Severity | Meaning |
-|---|---|
-| `blocker` | Must fix before merge; correctness/security/data loss/build break. |
-| `major` | Likely bug, regression, missing critical test, bad API/data boundary. |
-| `minor` | Maintainability, edge case, or local correctness issue worth fixing. |
-| `nit` | Optional clarity/style issue; must not block. |
+- A narrower review gate has already been selected.
 
 ## Process
 
-1. Read the change in context.
-   - diff,
-   - touched files,
-   - nearby code,
-   - tests,
-   - docs/ADRs if relevant.
+1. Invoke `review-router`.
 
-2. Check review dimensions.
-   - correctness,
-   - edge cases,
-   - backward compatibility,
-   - API/data model impact,
-   - security/privacy,
-   - performance,
-   - test coverage,
-   - observability/error handling,
-   - scope creep,
-   - readability/maintainability.
+2. Run only the required gates selected by the route.
+   - Use `review-domain-impact` first when domain behavior may change.
+   - Use `adr-review` for hard-to-reverse architecture or decision-record needs.
+   - Use `risk-gate` before risky actions.
+   - Use `review-automated-gate` for command and CI evidence.
+   - Use `review-ai-quality` for implementation quality findings.
+   - Use `evidence-ledger` when claims need evidence classification.
 
-3. For AI-generated work, additionally check:
-   - invented APIs,
-   - stale assumptions,
-   - unsupported claims,
-   - missing negative cases,
-   - overly broad refactors,
-   - unverified behavior.
+3. Use `review-final-merge-gate` for the only final merge decision.
 
-4. Separate findings from suggestions.
-   - Finding: evidence + required fix.
-   - Suggestion: optional improvement.
+4. If a required gate cannot be run, report `insufficient evidence` through the final gate instead of silently approving.
 
-5. Make a merge decision.
+## Gate map
 
-| Decision | Use when |
+| Concern | Gate |
 |---|---|
-| approve | No blocking/major issues and evidence is sufficient. |
-| approve with comments | Only minor/nit issues remain. |
-| request changes | Fixes required but direction is sound. |
-| block | Critical correctness/security/data/build risk. |
-| insufficient evidence | Cannot decide without more context or verification. |
+| Format, lint, typecheck, build, tests, CI | `review-automated-gate` |
+| Correctness, edge cases, tests, API/design boundary, maintainability, scope | `review-ai-quality` |
+| Business rules, workflow, state semantics, responsibility, operational meaning | `review-domain-impact` |
+| Architecture decision memory | `adr-review` |
+| Destructive, external, production, auth, secret, dependency, infra action | `risk-gate` |
+| Unsupported readiness/performance/security/correctness claims | `evidence-ledger` |
+| Merge decision | `review-final-merge-gate` |
 
 ## Output
 
 ```text
+Review route:
+- ...
+
+Gate results:
+- ...
+
 Decision:
 - ...
 
-Findings:
-- [severity] file:line — issue
-  Evidence:
-  Required fix:
-
-Suggestions:
+Required fixes:
 - ...
 
 Evidence reviewed:
@@ -99,15 +74,16 @@ Residual risk:
 
 ## Exit criteria
 
-- Decision is explicit.
-- Each blocking finding has evidence and required fix.
-- Suggestions are not mixed with required fixes.
-- Residual risk is named.
+- The review route is explicit.
+- Required gates are run or marked as missing evidence.
+- Final decision comes from `review-final-merge-gate`.
+- Domain and risk gates are not hidden inside technical review.
 
 ## Failure modes
 
 | Failure | Correction |
 |---|---|
-| Generic advice | Tie each finding to code/evidence. |
-| Treating passing tests as complete proof | Assess coverage and changed behavior. |
-| Reviewing style instead of merge risk | Prioritize correctness, scope, safety, evidence. |
+| Recreating the old all-in-one review | Route to focused gates. |
+| Approving from AI quality findings alone | Use `review-final-merge-gate`. |
+| Missing domain impact | Run `review-domain-impact` before technical gates when domain meaning may change. |
+| Treating green CI as approval | Keep mechanical evidence in `review-automated-gate` and merge decision in final gate. |

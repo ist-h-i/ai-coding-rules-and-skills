@@ -61,6 +61,11 @@ skills/
   controlled-implementation/SKILL.md
   test-first-verification/SKILL.md
   code-review-quality/SKILL.md
+  review-router/SKILL.md
+  review-automated-gate/SKILL.md
+  review-ai-quality/SKILL.md
+  review-domain-impact/SKILL.md
+  review-final-merge-gate/SKILL.md
   risk-gate/SKILL.md
   adr-review/SKILL.md
   doubt-driven-development/SKILL.md
@@ -90,7 +95,7 @@ For tools that only support a single custom instruction field, use `CUSTOM_INSTR
 | バグ・原因不明 | `doubt-driven-development` → `test-first-verification` |
 | スコープが広がりそう | `scope-control` |
 | 危険操作・外部影響 | `risk-gate` |
-| PR/diffレビュー | `code-review-quality` → `evidence-ledger` |
+| PR/diffレビュー | `review-router` → required gates → `review-final-merge-gate` |
 | 次のAgentへ渡す | `handoff-generation` |
 
 ## What changed from v1
@@ -99,6 +104,7 @@ For tools that only support a single custom instruction field, use `CUSTOM_INSTR
 - Added minimal skill routing inside `AGENTS.md` so routing does not depend only on a separate skill.
 - Added `risk-gate` for destructive, irreversible, external, production, auth, secret, billing, dependency, and infra risks.
 - Added `controlled-implementation` to cover the actual implementation loop between planning and verification.
+- Split PR review from one all-purpose skill into router, automated evidence, AI quality, domain impact, and final merge gates.
 - Strengthened every skill with exit criteria, failure modes, and evidence requirements.
 - Added Japanese usage docs and workflow examples for personal/team adoption.
 - Kept the original skill names from v1 where possible to avoid migration friction.

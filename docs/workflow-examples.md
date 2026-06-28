@@ -112,21 +112,29 @@ Review this PR and decide whether it can merge.
 Workflow:
 
 ```text
-code-review-quality
-evidence-ledger
+review-router
+required gates
+review-final-merge-gate
 ```
 
 Expected output:
 
 ```text
+Review route:
+- required gates
+- skipped gates
+
 Decision:
 - approve | approve with comments | request changes | block | insufficient evidence
 
-Findings:
-- [severity] file:line — issue
-  Evidence:
-  Impact:
-  Required fix:
+Gate summary:
+- automated
+- AI quality
+- domain if applicable
+- ADR/risk/evidence if applicable
+
+Required fixes:
+- [severity] file:line — issue, evidence, required fix
 
 Evidence reviewed:
 - ...

@@ -59,11 +59,11 @@ Route the task to the smallest workflow that controls the risk. Do not run every
 | New behavior | `spec-driven-development` | `test-first-verification` |
 | Implementation after plan exists | `controlled-implementation` | `scope-control` |
 | Long-running/multi-agent work | `planning-with-files` | `handoff-generation` |
-| Scope/refactor risk | `scope-control` | `code-review-quality` |
+| Scope/refactor risk | `scope-control` | `review-ai-quality` |
 | Bug/unknown cause | `doubt-driven-development` | `test-first-verification` |
 | Risk-gated action | `risk-gate` | `evidence-ledger` |
 | Architecture decision | `adr-review` | `grill-with-docs` |
-| PR/diff/generated code review | `code-review-quality` | `evidence-ledger` |
+| PR/diff/generated code review | `review-router` | `review-final-merge-gate` |
 | Claim validation | `evidence-ledger` | `doubt-driven-development` |
 | End of work | `handoff-generation` | — |
 

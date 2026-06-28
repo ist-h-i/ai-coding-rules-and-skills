@@ -9,11 +9,11 @@
 | New feature or user-visible behavior | `spec-driven-development` | `test-first-verification` | Spec, plan, reviewable tasks, verification path |
 | Clear non-trivial implementation | `controlled-implementation` | `test-first-verification` | Minimal scoped implementation summary |
 | Multi-step task likely to span sessions | `planning-with-files` | `handoff-generation` | Durable planning state and next task |
-| Risk of scope creep/refactor sprawl | `scope-control` | `code-review-quality` | Scope contract and scope audit |
+| Risk of scope creep/refactor sprawl | `scope-control` | `review-ai-quality` | Scope contract and quality audit |
 | Bug, regression, or unknown root cause | `doubt-driven-development` | `test-first-verification` | Hypothesis, falsification checks, evidence |
 | Destructive/external/production/security-sensitive action | `risk-gate` | `handoff-generation` | Risk classification, approval requirement, safe alternative |
 | Architecture or hard-to-reverse decision | `adr-review` | `grill-with-docs` | ADR action and decision record |
-| PR/diff/commit review | `code-review-quality` | `evidence-ledger` | Merge decision and actionable findings |
+| PR/diff/commit review | `review-router` | `review-final-merge-gate` | Required gates, gate evidence, and merge decision |
 | Performance/security/reliability/readiness claim | `evidence-ledger` | `doubt-driven-development` | Claim/evidence/status table |
 | End of work or passing to another agent | `handoff-generation` | `evidence-ledger` | Executable next task and residual risk |
 
@@ -34,7 +34,7 @@ Design:
 grill-design -> grill-with-docs -> adr-review when needed
 
 Review:
-code-review-quality -> evidence-ledger
+review-router -> required gates -> review-final-merge-gate
 
 Risky operation:
 risk-gate -> handoff-generation

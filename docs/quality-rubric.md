@@ -25,7 +25,7 @@ Target: every category should be 95+ for personal development and internal intro
 | Verification discipline | 95+ | Claims require evidence; verification commands/results/limitations are recorded |
 | Design review | 95+ | Grill workflow asks one gating question at a time and answers from repo/docs when possible |
 | Spec quality | 95+ | Behavior, non-goals, edge cases, acceptance criteria, and verification are observable |
-| Review quality | 95+ | Findings are evidence-backed, actionable, severity-tagged, and merge decision is clear |
+| Review quality | 95+ | Review gates are separated; findings are evidence-backed, actionable, severity-tagged, and final merge decision is clear |
 | Evidence handling | 95+ | Claims are extracted, classified, downgraded, and linked to next checks |
 | Handoff utility | 95+ | Next task includes scope, forbidden scope, expected output, verification, and stop condition |
 | Personal/internal usability | 95+ | Japanese usage guide, examples, and simple adoption path exist |
@@ -42,7 +42,7 @@ Target: every category should be 95+ for personal development and internal intro
 | Verification discipline | 96 | Kernel verification contract plus test-first and evidence-ledger |
 | Design review | 95 | Grill skill includes falsifiable outcome, decision tree, one-question rule |
 | Spec quality | 95 | Spec skill includes non-goals, edge cases, acceptance, verification, risks |
-| Review quality | 95 | Review skill includes severity, evidence, impact, required fix, residual risk |
+| Review quality | 95 | Review router/gates separate automated evidence, AI quality, domain impact, and final merge decision |
 | Evidence handling | 97 | Evidence ledger is explicit and reusable across review/handoff/completion |
 | Handoff utility | 96 | Handoff has executable next-task format and stop conditions |
 | Personal/internal usability | 95 | Japanese usage guide, workflow examples, and project overlay template included |

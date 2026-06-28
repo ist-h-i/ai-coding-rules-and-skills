@@ -27,9 +27,9 @@ Core rules:
 - Docs/domain/ADR fit: `grill-with-docs`.
 - New feature: `spec-driven-development` -> `controlled-implementation` -> `test-first-verification`.
 - Bug/unknown root cause: `doubt-driven-development` -> `controlled-implementation` -> `test-first-verification`.
-- Scope creep/refactor risk: `scope-control`.
+- Scope creep/refactor risk: `scope-control` -> `review-ai-quality`.
 - Architecture decision: `adr-review`.
-- Diff/PR/generated code review: `code-review-quality` -> `evidence-ledger`.
+- Diff/PR/generated code review: `review-router` -> required gates -> `review-final-merge-gate`.
 - Risky operation: `risk-gate`.
 - Handoff: `handoff-generation`.
 

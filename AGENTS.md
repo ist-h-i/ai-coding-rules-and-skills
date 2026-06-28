@@ -151,11 +151,11 @@ Use this routing table for non-trivial tasks.
 | New feature or behavior change | `spec-driven-development` | `test-first-verification` |
 | Controlled implementation after a plan exists | `controlled-implementation` | `scope-control` |
 | Multi-session or multi-agent task | `planning-with-files` | `handoff-generation` |
-| Scope creep/refactor risk | `scope-control` | `code-review-quality` |
+| Scope creep/refactor risk | `scope-control` | `review-ai-quality` |
 | Bug, regression, unknown root cause | `doubt-driven-development` | `test-first-verification` |
 | Destructive/external/security-sensitive action | `risk-gate` | `evidence-ledger` |
 | Architectural decision | `adr-review` | `grill-with-docs` |
-| Diff/PR/generated code review | `code-review-quality` | `evidence-ledger` |
+| Diff/PR/generated code review | `review-router` | `review-final-merge-gate` |
 | Claim validation | `evidence-ledger` | `doubt-driven-development` |
 | End of work or next-agent prompt | `handoff-generation` | `evidence-ledger` |
 

@@ -53,7 +53,7 @@ AGENTS.mdを前提に、spec-driven-development skillを使ってください。
 | 新機能を作る | `spec-driven-development` → `test-first-verification` |
 | バグ原因が不明 | `doubt-driven-development` |
 | 実装フェーズに入る | `controlled-implementation` |
-| PRレビュー | `code-review-quality` → `evidence-ledger` |
+| PRレビュー | `review-router` → required gates → `review-final-merge-gate` |
 | 破壊的操作・deploy・migration・secret絡み | `risk-gate` |
 | 次のCodex/Cursor/Claudeに渡す | `handoff-generation` |
 

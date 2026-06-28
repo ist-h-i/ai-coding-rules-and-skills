@@ -4,28 +4,33 @@ Static packaging checks. This does not prove runtime behavior; it catches drift 
 
 ## Manifest / directory consistency
 
-- Skills in manifest: 15
-- Skill directories: 15
+- Skills in manifest: 20
+- Skill directories: 20
 - Missing directories: none
 - Extra directories: none
 
 ## Skill section checks
 
-- `skills/adr-review/SKILL.md`: words=259, name_ok=True, missing=none
-- `skills/code-review-quality/SKILL.md`: words=354, name_ok=True, missing=none
-- `skills/controlled-implementation/SKILL.md`: words=356, name_ok=True, missing=none
-- `skills/doubt-driven-development/SKILL.md`: words=276, name_ok=True, missing=none
-- `skills/evidence-ledger/SKILL.md`: words=273, name_ok=True, missing=none
-- `skills/grill-design/SKILL.md`: words=300, name_ok=True, missing=none
-- `skills/grill-with-docs/SKILL.md`: words=332, name_ok=True, missing=none
-- `skills/handoff-generation/SKILL.md`: words=274, name_ok=True, missing=none
-- `skills/planning-with-files/SKILL.md`: words=310, name_ok=True, missing=none
-- `skills/repository-orientation/SKILL.md`: words=279, name_ok=True, missing=none
-- `skills/risk-gate/SKILL.md`: words=322, name_ok=True, missing=none
-- `skills/scope-control/SKILL.md`: words=271, name_ok=True, missing=none
-- `skills/skill-router/SKILL.md`: words=455, name_ok=True, missing=none
-- `skills/spec-driven-development/SKILL.md`: words=302, name_ok=True, missing=none
-- `skills/test-first-verification/SKILL.md`: words=308, name_ok=True, missing=none
+- `skills/adr-review/SKILL.md`: words=317, name_ok=True, missing=none
+- `skills/code-review-quality/SKILL.md`: words=442, name_ok=True, missing=none
+- `skills/controlled-implementation/SKILL.md`: words=405, name_ok=True, missing=none
+- `skills/doubt-driven-development/SKILL.md`: words=351, name_ok=True, missing=none
+- `skills/evidence-ledger/SKILL.md`: words=360, name_ok=True, missing=none
+- `skills/grill-design/SKILL.md`: words=356, name_ok=True, missing=none
+- `skills/grill-with-docs/SKILL.md`: words=381, name_ok=True, missing=none
+- `skills/handoff-generation/SKILL.md`: words=320, name_ok=True, missing=none
+- `skills/planning-with-files/SKILL.md`: words=342, name_ok=True, missing=none
+- `skills/repository-orientation/SKILL.md`: words=325, name_ok=True, missing=none
+- `skills/review-ai-quality/SKILL.md`: words=456, name_ok=True, missing=none
+- `skills/review-automated-gate/SKILL.md`: words=340, name_ok=True, missing=none
+- `skills/review-domain-impact/SKILL.md`: words=483, name_ok=True, missing=none
+- `skills/review-final-merge-gate/SKILL.md`: words=446, name_ok=True, missing=none
+- `skills/review-router/SKILL.md`: words=438, name_ok=True, missing=none
+- `skills/risk-gate/SKILL.md`: words=380, name_ok=True, missing=none
+- `skills/scope-control/SKILL.md`: words=315, name_ok=True, missing=none
+- `skills/skill-router/SKILL.md`: words=536, name_ok=True, missing=none
+- `skills/spec-driven-development/SKILL.md`: words=365, name_ok=True, missing=none
+- `skills/test-first-verification/SKILL.md`: words=364, name_ok=True, missing=none
 
 ## Document path checks
 

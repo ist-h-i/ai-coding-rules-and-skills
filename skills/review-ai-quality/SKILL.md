@@ -1,0 +1,106 @@
+---
+name: review-ai-quality
+description: Review a code change for AI-assessable implementation quality: correctness, edge cases, test adequacy, API/design boundaries, maintainability, error handling, performance risk, security signals, and scope creep. Use for PR/diff/code reviews after routing, but do not make the final merge decision.
+---
+
+# AI Quality Review
+
+## Goal
+
+Find evidence-backed implementation issues that a code reviewer can identify from the diff and repository context.
+
+## Use when
+
+- Reviewing implementation quality in a PR, diff, commit, patch, or generated code.
+- The change may affect correctness, edge cases, APIs, tests, maintainability, local design, performance, security, or scope.
+- `review-router` selects an AI quality review gate.
+
+## Do not use when
+
+- The only question is whether commands passed.
+- The issue is primarily domain authorization, owner approval, ADR need, or a risky action.
+- No concrete code or design artifact is available.
+
+## Review stance
+
+Be specific. A finding needs file/line evidence, impact, and a required fix. Do not produce generic style advice.
+
+## Severity
+
+| Severity | Meaning |
+|---|---|
+| `blocker` | Must fix before merge; correctness/security/data loss/build break. |
+| `major` | Likely bug, regression, missing critical test, bad API/data boundary. |
+| `minor` | Maintainability, edge case, or local correctness issue worth fixing. |
+| `nit` | Optional clarity/style issue; must not block. |
+
+## Process
+
+1. Read the change in context.
+   - diff,
+   - touched files,
+   - nearby implementation,
+   - tests,
+   - public contracts,
+   - docs/ADRs if needed for technical meaning.
+
+2. Review focus areas.
+   - correctness and edge cases,
+   - backward compatibility,
+   - API/data-shape impact,
+   - error handling and observability,
+   - security/privacy signals,
+   - performance risk,
+   - test adequacy,
+   - scope creep,
+   - readability and maintainability.
+
+3. For AI-generated work, additionally check:
+   - invented APIs,
+   - stale assumptions,
+   - unsupported claims,
+   - missing negative cases,
+   - broad refactors,
+   - unverified behavior.
+
+4. Separate findings from suggestions.
+
+5. Return quality gate status, not final merge approval.
+
+## Output
+
+```text
+AI quality gate:
+- Gate status: pass | pass with comments | fail | insufficient evidence
+
+Findings:
+- [severity] file:line - issue
+  Evidence:
+  Impact:
+  Required fix:
+
+Suggestions:
+- ...
+
+Evidence reviewed:
+- ...
+
+Residual quality risk:
+- ...
+```
+
+## Exit criteria
+
+- Each blocking or major issue has evidence and required fix.
+- Suggestions are not mixed with required fixes.
+- Residual risk is named.
+- Final merge decision is left to `review-final-merge-gate`.
+
+## Failure modes
+
+| Failure | Correction |
+|---|---|
+| Generic advice | Tie each finding to code/evidence. |
+| Treating passing tests as complete proof | Assess coverage and changed behavior. |
+| Making domain approval decisions | Route domain meaning to `review-domain-impact`. |
+| Approving the PR directly | Report gate status only. |
