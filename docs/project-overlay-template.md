@@ -2,6 +2,15 @@
 
 Use this for repository-specific rules. Do not put these into the global kernel unless they apply to every repository you work on.
 
+Routing order:
+
+```text
+generic workflow selection via skill-router
+-> project overlay skill selection when the overlay signal applies
+```
+
+Do not replace the generic `skill-router` table with framework-specific routes. Add overlay skills only for repository-specific framework, domain, architecture, UI/UX, data, CI, or safety rules.
+
 Recommended filename:
 
 ```text
@@ -30,6 +39,14 @@ or append as a clearly marked project section below the global `AGENTS.md`.
 - Build tool:
 - Test framework:
 - Deployment target:
+
+## Project-specific skills
+
+Use these only after generic workflow selection:
+
+| Overlay signal | Skill | Use after generic workflow |
+|---|---|---|
+|  |  |  |
 
 ## Commands
 

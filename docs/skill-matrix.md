@@ -1,26 +1,38 @@
 # Skill Matrix
 
+This matrix is a reference view of the canonical runtime routes in `skills/skill-router/SKILL.md`. If they differ, update this file to mirror the skill router instead of treating this table as a separate source of truth.
+
 | Situation | Primary skill | Secondary skill | Expected output |
 |---|---|---|---|
 | Unsure which workflow applies | `skill-router` | — | Selected workflow and skipped workflows |
-| First task in unfamiliar repo | `repository-orientation` | `scope-control` | Repo map, commands, conventions, risks |
+| First task in unfamiliar repo | `repository-orientation` | `scope-control` if target boundary is unclear; `planning-with-files` only if the task spans sessions/agents or durable state is needed | Repo map, commands, conventions, risks |
 | User says “grill me” or plan is under-specified | `grill-design` | `grill-with-docs` | Design decision summary and acceptance criteria |
 | Plan must fit docs/domain/ADRs | `grill-with-docs` | `adr-review` | Term/doc conflict review and documentation decision |
-| New feature or user-visible behavior | `spec-driven-development` | `test-first-verification` | Spec, plan, reviewable tasks, verification path |
+| New feature or user-visible behavior | `spec-driven-development` | `controlled-implementation` -> `test-first-verification` | Spec, scoped implementation, verification evidence |
 | Clear non-trivial implementation | `controlled-implementation` | `test-first-verification` | Minimal scoped implementation summary |
 | Multi-step task likely to span sessions | `planning-with-files` | `handoff-generation` | Durable planning state and next task |
-| Risk of scope creep/refactor sprawl | `scope-control` | `review-ai-quality` | Scope contract and quality audit |
-| Bug, regression, or unknown root cause | `doubt-driven-development` | `test-first-verification` | Hypothesis, falsification checks, evidence |
-| Destructive/external/production/security-sensitive action | `risk-gate` | `handoff-generation` | Risk classification, approval requirement, safe alternative |
+| Risk of scope creep/refactor sprawl | `scope-control` | `controlled-implementation` if proceeding to code; review phase uses `review-router` -> `review-ai-quality` | Scope contract, scoped implementation path, or review route |
+| Bug, regression, or unknown root cause | `doubt-driven-development` | `test-first-verification` for reproduction -> `controlled-implementation` -> `test-first-verification` for regression proof | Hypothesis, reproduction evidence, scoped fix, regression proof |
 | Architecture or hard-to-reverse decision | `adr-review` | `grill-with-docs` | ADR action and decision record |
 | PR/diff/commit review | `review-router` | `review-final-merge-gate` | Required gates, gate evidence, and merge decision |
-| MR README / specification understanding record | `mr-readme-generation` | `adr-review` | Durable MR context for human review and future AI reuse |
+| MR/PR README, PR explanation, or durable change-context documentation | `mr-readme-generation` | `adr-review` | Durable change context for human review and future AI reuse |
 | Performance/security/reliability/readiness claim | `evidence-ledger` | `doubt-driven-development` | Claim/evidence/status table |
 | End of work or passing to another agent | `handoff-generation` | `evidence-ledger` | Executable next task and residual risk |
 
 ## Routing rule
 
 Use the smallest workflow that reduces real risk. Do not invoke a skill because its name matches a keyword. Invoke it because the task has the corresponding uncertainty, evidence gap, or failure mode.
+
+## Routing overlays
+
+Project overlay:
+After generic workflow selection, consider framework/domain-specific project overlay skills when the overlay signal applies. Do not add project-specific skills to the generic routing table.
+
+Risk overlay:
+If any task involves destructive, external, production, auth, secret, dependency, migration, billing, email, or infra impact, run `risk-gate` before the selected workflow proceeds to action.
+
+Evidence overlay:
+Use `evidence-ledger` whenever the response makes or evaluates a claim about correctness, fixed behavior, no regression, readiness, performance, security, reliability, UX, cost, or maintainability.
 
 ## Common chains
 
@@ -29,7 +41,7 @@ New feature:
 spec-driven-development -> controlled-implementation -> test-first-verification
 
 Bug:
-doubt-driven-development -> controlled-implementation -> test-first-verification
+doubt-driven-development -> test-first-verification for reproduction -> controlled-implementation -> test-first-verification for regression proof
 
 Design:
 grill-design -> grill-with-docs -> adr-review when needed
@@ -37,9 +49,9 @@ grill-design -> grill-with-docs -> adr-review when needed
 Review:
 review-router -> required gates -> review-final-merge-gate
 
-MR README:
+MR/PR change-context README:
 mr-readme-generation -> adr-review when hard-to-reverse decisions appear
 
 Risky operation:
-risk-gate -> handoff-generation
+risk-gate -> selected workflow when approved, or handoff-generation when action needs approval
 ```

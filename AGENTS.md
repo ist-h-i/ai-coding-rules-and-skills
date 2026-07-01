@@ -140,27 +140,19 @@ If verification cannot be run, state:
 
 ## 8. Skill routing
 
-Use this routing table for non-trivial tasks.
+`skills/skill-router/SKILL.md` is the canonical runtime routing source for non-trivial workflows. `AGENTS.md` only decides whether to stay in the kernel, invoke `skill-router`, or honor an explicitly requested relevant skill.
 
-| Situation | Primary skill | Secondary skill |
-|---|---|---|
-| Unclear workflow | `skill-router` | — |
-| Unfamiliar repository | `repository-orientation` | `planning-with-files` |
-| Ambiguous plan/design | `grill-design` | `grill-with-docs` |
-| Plan must fit existing docs/domain/ADRs | `grill-with-docs` | `adr-review` |
-| New feature or behavior change | `spec-driven-development` | `test-first-verification` |
-| Controlled implementation after a plan exists | `controlled-implementation` | `scope-control` |
-| Multi-session or multi-agent task | `planning-with-files` | `handoff-generation` |
-| Scope creep/refactor risk | `scope-control` | `review-ai-quality` |
-| Bug, regression, unknown root cause | `doubt-driven-development` | `test-first-verification` |
-| Destructive/external/security-sensitive action | `risk-gate` | `evidence-ledger` |
-| Architectural decision | `adr-review` | `grill-with-docs` |
-| Diff/PR/generated code review | `review-router` | `review-final-merge-gate` |
-| MR README or reusable specification understanding | `mr-readme-generation` | `adr-review` |
-| Claim validation | `evidence-ledger` | `doubt-driven-development` |
-| End of work or next-agent prompt | `handoff-generation` | `evidence-ledger` |
+| Situation | Route |
+|---|---|
+| Trivial localized edit | `AGENTS.md` only |
+| User explicitly names a relevant skill | Use that skill; use `skill-router` only if the requested route conflicts with observed risk |
+| Non-trivial, ambiguous, multi-step, design, investigation, review, risk-gated, or handoff work | `skill-router` |
+| Project overlay contains framework/domain-specific skills | First use `skill-router` for generic workflow selection, then select relevant project overlay skill before action |
 
 Do not load every skill “to be safe.” Context overload reduces quality.
+
+Risk overlay:
+If any task involves destructive, external, production, auth, secret, dependency, migration, billing, email, or infra impact, run `risk-gate` before the selected workflow proceeds to action.
 
 ## 9. Anti-rationalization rules
 
@@ -178,6 +170,9 @@ Reject these shortcuts:
 Every non-trivial change needs evidence proportional to risk.
 
 ## 10. Output contracts
+
+Evidence overlay:
+Use `evidence-ledger` whenever the response makes or evaluates a claim about correctness, fixed behavior, no regression, readiness, performance, security, reliability, UX, cost, or maintainability.
 
 For implementation tasks, end with:
 

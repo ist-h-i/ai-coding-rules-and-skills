@@ -9,6 +9,8 @@ description: Separate claims from evidence and downgrade unsupported assertions.
 
 Prevent the agent from overstating what has been proven.
 
+This is an output overlay, not only a user-requested workflow. Use it whenever the response makes or evaluates a claim about correctness, fixed behavior, no regression, readiness, performance, security, reliability, UX, cost, or maintainability.
+
 ## Use when
 
 The output contains or may imply claims such as:

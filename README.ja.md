@@ -34,7 +34,7 @@ docs/          運用・カスタマイズ・採点基準
 
 1. `AGENTS.md` を対象repoのルートに置く。
 2. AIコーディングツールのプロジェクト指示として読ませる。
-3. 普段はKernelだけで使う。
+3. 普段はKernelだけで使う。ルーティングの正本は `skills/skill-router/SKILL.md`。
 4. 重い作業ではSkill名を明示して呼ぶ。
 
 例:
@@ -46,16 +46,19 @@ AGENTS.mdを前提に、spec-driven-development skillを使ってください。
 
 ## 代表的な呼び出し
 
+正本は `skills/skill-router/SKILL.md` です。以下は代表例です。
+
 | 状況 | 呼ぶSkill |
 |---|---|
 | 設計を詰めたい | `grill-design` |
 | 既存docs/ADRと整合させたい | `grill-with-docs` |
-| 新機能を作る | `spec-driven-development` → `test-first-verification` |
-| バグ原因が不明 | `doubt-driven-development` |
+| 新機能を作る | `spec-driven-development` → `controlled-implementation` → `test-first-verification` |
+| バグ原因が不明 | `doubt-driven-development` → `test-first-verification` for reproduction → `controlled-implementation` → `test-first-verification` for regression proof |
 | 実装フェーズに入る | `controlled-implementation` |
+| スコープ逸脱が怖い | `scope-control`（実装へ進むなら `controlled-implementation`、レビューでは `review-router` → `review-ai-quality`） |
 | PRレビュー | `review-router` → required gates → `review-final-merge-gate` |
-| MR README / 仕様理解固定 | `mr-readme-generation` |
-| 破壊的操作・deploy・migration・secret絡み | `risk-gate` |
+| MR/PR README・PR説明・変更文脈固定 | `mr-readme-generation` |
+| 破壊的操作・deploy・migration・secret絡み | `risk-gate` before the selected workflow proceeds to action |
 | 次のCodex/Cursor/Claudeに渡す | `handoff-generation` |
 
 ## 社内紹介時の説明
@@ -71,4 +74,6 @@ AGENTS.mdを前提に、spec-driven-development skillを使ってください。
 - 完了条件は「コードを書いた」ではなく「検証した」。
 - 根拠なしの成果主張をEvidence Ledgerで潰す。
 - 危険操作はRisk Gateで止める。
+- Risk Gateは単独工程ではなく、危険影響がある全ワークフローの前に割り込む。
+- Project Overlayの専門Skillは、`skill-router` でgeneric workflowを選んだ後に必要な場合だけ選ぶ。
 - Handoffまで含めてAgent運用に対応する。

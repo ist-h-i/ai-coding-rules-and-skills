@@ -9,6 +9,8 @@ description: Gate destructive, irreversible, production-facing, credential-sensi
 
 Prevent an AI agent from taking actions whose damage cannot be contained by a normal code review.
 
+This is an overlay gate, not only a standalone workflow. If any selected workflow includes destructive, external, production, auth, secret, dependency, migration, billing, email, or infra impact, run this gate before the workflow proceeds to action.
+
 ## Use when
 
 The task may involve:

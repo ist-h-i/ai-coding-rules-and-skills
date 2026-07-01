@@ -66,8 +66,9 @@ Workflow:
 
 ```text
 doubt-driven-development
-test-first-verification
+test-first-verification for reproduction
 controlled-implementation
+test-first-verification for regression proof
 ```
 
 Expected behavior:
@@ -172,12 +173,12 @@ Do not:
 Stop and ask if:
 ```
 
-## 7. MR README generation
+## 7. MR/PR README generation
 
 User request:
 
 ```text
-Create an MR README that explains this merge request for human review and future AI reuse.
+Create a PR README that explains this change for human review and future AI reuse.
 ```
 
 Workflow:
@@ -191,10 +192,10 @@ review-router only if a merge decision is requested
 Expected output:
 
 ```text
-MR README:
-- Path: docs/mr/<branch-or-mr>.md
+MR/PR README:
+- Path: docs/pr/<branch-or-pr>.md
 - Created or updated: created
-- Evidence reviewed: diff, changed files, issue/MR description, nearby docs/tests
+- Evidence reviewed: diff, changed files, issue/PR description, nearby docs/tests
 - Evidence gaps: ...
 - ADR status: none | new ADR candidate | existing ADR update candidate
 - Review decision emitted: no

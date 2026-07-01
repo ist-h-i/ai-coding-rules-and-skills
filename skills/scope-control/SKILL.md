@@ -62,6 +62,8 @@ Diff budget:
    - The implementation requires a broader abstraction than planned.
 
 5. During implementation and review, flag out-of-scope changes.
+   - If proceeding to code, hand the scope contract to `controlled-implementation`.
+   - If reviewing a diff, route scope drift through `review-router` -> `review-ai-quality`.
 
 ## Output
 

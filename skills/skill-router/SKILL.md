@@ -9,6 +9,8 @@ description: Select the smallest relevant workflow for a coding-agent task. Use 
 
 Route the task to the smallest workflow that controls the risk. Do not run every skill.
 
+This skill is the canonical runtime routing source. `AGENTS.md` only contains the minimal kernel-level routing gate, and documentation tables or workflow examples must mirror this skill instead of defining competing routes.
+
 ## Use when
 
 - The task is non-trivial and the correct workflow is unclear.
@@ -53,24 +55,32 @@ Route the task to the smallest workflow that controls the risk. Do not run every
 
 | Situation | Primary | Secondary |
 |---|---|---|
-| Unfamiliar repo | `repository-orientation` | — |
+| Unfamiliar repo | `repository-orientation` | `scope-control` if target boundary is unclear; `planning-with-files` only if the task spans sessions/agents or durable state is needed |
 | Ambiguous design | `grill-design` | `spec-driven-development` |
 | Existing docs/domain/ADR constraints | `grill-with-docs` | `adr-review` |
-| New behavior | `spec-driven-development` | `test-first-verification` |
+| New behavior | `spec-driven-development` | `controlled-implementation` -> `test-first-verification` |
 | Implementation after plan exists | `controlled-implementation` | `scope-control` |
 | Long-running/multi-agent work | `planning-with-files` | `handoff-generation` |
-| Scope/refactor risk | `scope-control` | `review-ai-quality` |
-| Bug/unknown cause | `doubt-driven-development` | `test-first-verification` |
-| Risk-gated action | `risk-gate` | `evidence-ledger` |
+| Scope/refactor risk | `scope-control` | `controlled-implementation` if proceeding to code; review phase uses `review-router` -> `review-ai-quality` |
+| Bug/unknown cause | `doubt-driven-development` | `test-first-verification` for reproduction -> `controlled-implementation` -> `test-first-verification` for regression proof |
 | Architecture decision | `adr-review` | `grill-with-docs` |
 | PR/diff/generated code review | `review-router` | `review-final-merge-gate` |
-| MR README or reusable specification understanding | `mr-readme-generation` | `adr-review` |
+| MR/PR README, PR explanation, or durable change-context documentation | `mr-readme-generation` | `adr-review` |
 | Claim validation | `evidence-ledger` | `doubt-driven-development` |
 | End of work | `handoff-generation` | — |
 
-4. State what is intentionally skipped.
+4. Apply project overlay skill selection.
+   - If a project overlay contains framework, domain, UI/UX, architecture, CI, data, security, or other repository-specific skills, consider them after generic workflow selection.
+   - Select overlay skills only when the overlay signal applies to the selected work type.
+   - Do not add project-specific skills to the generic routing table.
 
-5. Continue into the selected primary workflow unless the task requires user approval.
+5. State what is intentionally skipped.
+
+6. Apply overlays before action.
+   - Risk overlay: if any task involves destructive, external, production, auth, secret, dependency, migration, billing, email, or infra impact, run `risk-gate` before the selected workflow proceeds to action.
+   - Evidence overlay: use `evidence-ledger` whenever the response makes or evaluates a claim about correctness, fixed behavior, no regression, readiness, performance, security, reliability, UX, cost, or maintainability.
+
+7. Continue into the selected primary workflow unless the task requires user approval.
 
 ## Output
 
@@ -78,6 +88,7 @@ Route the task to the smallest workflow that controls the risk. Do not run every
 Selected workflow:
 - Primary:
 - Secondary:
+- Project overlay skills:
 - Skipped:
 
 Reason:

@@ -1,9 +1,9 @@
-# Example: MR README generation
+# Example: MR/PR README generation
 
 ## Request
 
 ```text
-Create an MR README for this change. Make it useful for human reviewers and future AI coding agents.
+Create a PR README for this change. Make it useful for human reviewers and future AI coding agents.
 ```
 
 ## Workflow
@@ -19,10 +19,10 @@ review-router only if a merge decision is requested
 ## Expected output
 
 ```text
-MR README:
-- Path: docs/mr/feature-task-export.md
+MR/PR README:
+- Path: docs/pr/feature-task-export.md
 - Created or updated: created
-- Evidence reviewed: MR description, diff, changed files, nearby tests, related docs
+- Evidence reviewed: PR description, diff, changed files, nearby tests, related docs
 - Evidence gaps: CI was not available
 - ADR status: none
 - Review decision emitted: no

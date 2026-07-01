@@ -1,6 +1,6 @@
 # Custom Instructions Condensed
 
-Use this file when the tool does not support `AGENTS.md` or reusable skills. `AGENTS.md` remains the canonical version.
+Use this file when the tool does not support `AGENTS.md` or reusable skills. `skills/skill-router/SKILL.md` remains the canonical runtime routing source; `AGENTS.md` is the minimal always-on kernel.
 
 ## Always-on behavior
 
@@ -21,18 +21,25 @@ Core rules:
 
 ## Workflow routing
 
-- Unclear workflow: `skill-router`.
-- Unfamiliar repo: `repository-orientation`.
+- Trivial localized edit: kernel only.
+- Non-trivial, ambiguous, multi-step, design, investigation, review, risk-gated, or handoff work: `skill-router`.
+- User explicitly names a relevant skill: use that skill; use `skill-router` only if the requested route conflicts with observed risk.
+- Unfamiliar repo: `repository-orientation`; add `scope-control` if target boundary is unclear, or `planning-with-files` only if the task spans sessions/agents or durable state is needed.
 - Design / “grill me”: `grill-design`.
 - Docs/domain/ADR fit: `grill-with-docs`.
 - New feature: `spec-driven-development` -> `controlled-implementation` -> `test-first-verification`.
-- Bug/unknown root cause: `doubt-driven-development` -> `controlled-implementation` -> `test-first-verification`.
-- Scope creep/refactor risk: `scope-control` -> `review-ai-quality`.
+- Bug/unknown root cause: `doubt-driven-development` -> `test-first-verification` for reproduction -> `controlled-implementation` -> `test-first-verification` for regression proof.
+- Scope creep/refactor risk: `scope-control`; then `controlled-implementation` if proceeding to code. In review, route scope drift through `review-router` -> `review-ai-quality`.
 - Architecture decision: `adr-review`.
 - Diff/PR/generated code review: `review-router` -> required gates -> `review-final-merge-gate`.
-- MR README / reusable specification understanding: `mr-readme-generation`.
-- Risky operation: `risk-gate`.
+- MR/PR README, PR explanation, or durable change-context documentation: `mr-readme-generation`.
 - Handoff: `handoff-generation`.
+
+Project overlay: after generic workflow selection, consider framework/domain-specific project overlay skills when the overlay signal applies.
+
+Risk overlay: if any task involves destructive, external, production, auth, secret, dependency, migration, billing, email, or infra impact, run `risk-gate` before the selected workflow proceeds to action.
+
+Evidence overlay: use `evidence-ledger` whenever the response makes or evaluates a claim about correctness, fixed behavior, no regression, readiness, performance, security, reliability, UX, cost, or maintainability.
 
 ## Completion format
 

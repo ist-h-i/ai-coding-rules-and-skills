@@ -11,7 +11,7 @@ Add CSV export for the task list.
 Use:
 
 ```text
-spec-driven-development → test-first-verification → controlled-implementation
+spec-driven-development → controlled-implementation → test-first-verification
 ```
 
 ## Expected first response

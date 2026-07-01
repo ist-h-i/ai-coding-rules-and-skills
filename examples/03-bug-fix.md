@@ -11,7 +11,7 @@ The date filter returns one extra day in Tokyo time.
 Use:
 
 ```text
-doubt-driven-development → test-first-verification → controlled-implementation
+doubt-driven-development → test-first-verification for reproduction → controlled-implementation → test-first-verification for regression proof
 ```
 
 ## Expected investigation shape
@@ -33,4 +33,5 @@ Conclusion:
 
 Next:
 - Implement only after reproduction or decisive evidence.
+- Re-run regression verification after the scoped fix.
 ```
