@@ -8,6 +8,10 @@ Changes:
 - Routed review architecture impact through the new gate while keeping detailed boundary mechanics in `application-boundary-architecture` and durable architecture records in `adr-review`.
 - Removed the legacy code review compatibility adapter and standardized review entry points on `review-router`.
 - Added layer-aware final merge decisions to `review-final-merge-gate`, including layer summaries and upper-layer precedence over mechanical passes.
+- Added `review-context-generation` and `docs/ai/review-context.md` for durable review context with evidence-status-labeled claims.
+- Added `review-output-quality` for human, system, AI, and generated output review.
+- Added `review-adversarial-risk` for noise-controlled severe failure-path review.
+- Routed output-quality and adversarial-risk signals out of `review-ai-quality` and into dedicated review gates.
 
 ## v2.3.0
 

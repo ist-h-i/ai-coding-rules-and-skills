@@ -1,6 +1,6 @@
 ---
 name: review-router
-description: Route a diff, PR, commit, patch, or generated code review to the smallest required review gates. Use before merge reviews to decide which automated, AI quality, architecture, domain, ADR, risk, evidence, and final merge gates are required, optional, or skipped.
+description: Route a diff, PR, commit, patch, or generated code review to the smallest required review gates. Use before merge reviews to decide which automated, AI quality, architecture, output quality, adversarial risk, domain, ADR, risk, evidence, and final merge gates are required, optional, or skipped.
 ---
 
 # Review Router
@@ -26,6 +26,7 @@ Select the smallest set of review gates needed to make the merge decision defens
    - diff or changed files,
    - touched public interfaces,
    - tests and commands,
+   - `docs/ai/review-context.md` or project overlay review context when available,
    - docs/ADRs when terms, state, or architecture may change.
 
 2. Classify changed meaning.
@@ -58,6 +59,9 @@ Select the smallest set of review gates needed to make the merge decision defens
 5. Route gates from the layer contract.
    - `review-domain-impact` first if domain behavior may change.
    - `review-architecture-impact` if structural, dependency, boundary, public contract, persistence, infrastructure, ownership, lifecycle, or coupling impact may exist.
+   - `review-output-quality` if user-visible, operator-visible, reviewer-visible, system-consumed, AI-consumed, generated, or structured output may change.
+   - `review-adversarial-risk` as an overlay when high blast radius, misuse paths, security/privacy, prompt/generated-output, AI-generated, critical workflow, or release-readiness risk may exist.
+   - `review-context-generation` before context-heavy gates when durable review context is missing and repeated reviews, output-quality review, or adversarial review are expected.
    - `adr-review` if architectural memory or hard-to-reverse boundary decisions may need to be recorded, updated, or superseded.
    - `risk-gate` before any destructive, external, auth, secret, production, dependency, or infra action.
    - `review-automated-gate` for mechanical verification evidence.
@@ -136,6 +140,7 @@ Review route:
 - Optional gates:
 - Skipped gates:
 - Gate order:
+- Review context:
 - Reason:
 - Inputs still needed:
 ```
@@ -146,6 +151,9 @@ Review route:
 - Layer applicability is explicit before gates run.
 - Required layers map to selected gates.
 - Architecture impact maps to `review-architecture-impact` instead of being hidden inside `review-ai-quality` or conflated with `adr-review`.
+- Output quality maps to `review-output-quality` instead of being hidden inside `review-ai-quality`.
+- Adversarial risk maps to `review-adversarial-risk` instead of being hidden inside `review-ai-quality` or `risk-gate`.
+- Durable project review context is read when available, or `review-context-generation` is selected when missing context would otherwise recur.
 - Skipped layers have evidence-based reasons.
 - Insufficient-evidence layers name the missing inputs.
 - Domain impact is checked before technical review when applicable.

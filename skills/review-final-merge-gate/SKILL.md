@@ -27,6 +27,9 @@ Make the final merge decision from gate evidence without hiding missing checks, 
    - `review-automated-gate`,
    - `review-ai-quality`,
    - `review-architecture-impact` when applicable,
+   - `review-output-quality` when applicable,
+   - `review-adversarial-risk` when applicable,
+   - `docs/ai/review-context.md` or project overlay review context when available,
    - `review-domain-impact` when applicable,
    - `adr-review` when applicable,
    - `risk-gate` when applicable,
@@ -35,6 +38,9 @@ Make the final merge decision from gate evidence without hiding missing checks, 
 2. Build a layer summary.
    - Every layer routed by `review-router` must appear in the final decision.
    - Architecture layer evidence comes from `review-architecture-impact` when that gate was required.
+   - Output quality layer evidence comes from `review-output-quality` when that gate was required.
+   - Adversarial risk overlay evidence comes from `review-adversarial-risk` when that gate was required.
+   - Durable review context may explain skipped, insufficient-evidence, known-issue, or accepted-risk judgments, but cannot replace required gate evidence.
    - Use `pass`, `fail`, `skipped`, or `insufficient evidence` for each layer.
    - Required layers without gate evidence remain `insufficient evidence`; do not silently downgrade them to skipped.
    - Skipped layers must retain the router's evidence-based reason.

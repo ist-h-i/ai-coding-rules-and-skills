@@ -11,6 +11,8 @@ generic workflow selection via skill-router
 
 Do not replace the generic `skill-router` table with framework-specific routes. Add overlay skills only for repository-specific framework, domain, architecture, UI/UX, data, CI, or safety rules.
 
+Use `docs/ai/review-context.md` for reusable review context such as personas, output contracts, critical workflows, accepted risks, known issues, and review noise-control rules. Keep permanent agent behavior rules in the project overlay; keep task progress in `planning-with-files`.
+
 Recommended filename:
 
 ```text
@@ -124,6 +126,9 @@ Avoid these terms:
 - Required docs:
 - Required ADR conditions:
 - Review blockers:
+- Durable review context path:
+- Accepted risk owners:
+- Known issues not to re-report:
 
 ## Handoff format additions
 
