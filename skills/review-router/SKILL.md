@@ -47,7 +47,7 @@ Select the smallest set of review gates needed to make the merge decision defens
    - Architecture: hard-to-reverse boundaries, public APIs, dependencies, persistence, deployment, cross-module contracts.
    - Design: local design, responsibility split, API shape, data flow, state ownership, error boundaries.
    - Logic: correctness, edge cases, API use, error handling, concurrency, compatibility.
-   - Output quality: generated code/text quality, invented APIs, stale assumptions, unsupported claims, reviewer-facing clarity.
+   - Output quality: user-visible, operator-visible, reviewer-visible, system-consumed, or AI-consumed output such as UI screens, reports, notifications, CLI output, API responses, docs, generated text, or AI output; review form, structure, completeness, clarity, persona/consumer fit, and output contract fit.
    - Test / verification: changed behavior coverage, regression proof, missing negative cases, executable evidence.
    - Style / maintainability: naming, readability, duplication, scope creep, local complexity.
    - Mechanical: format, lint, typecheck, build, tests, static analysis, CI.
