@@ -27,10 +27,11 @@ Core rules:
 - Unfamiliar repo: `repository-orientation`; add `scope-control` if target boundary is unclear, or `planning-with-files` only if the task spans sessions/agents or durable state is needed.
 - Design / “grill me”: `grill-design`.
 - Docs/domain/ADR fit: `grill-with-docs`.
+- Application boundary decision needed before implementation, including dependency direction, state ownership, external I/O boundary, DTO/error trust boundary, async lifetime, feature public API, usecase/repository/port/adapter/mapper necessity, ID boundary, or architecture guard rollout: `application-boundary-architecture`, then return to `spec-driven-development` or `controlled-implementation`.
 - New feature: `spec-driven-development` -> `controlled-implementation` -> `test-first-verification`.
 - Bug/unknown root cause: `doubt-driven-development` -> `test-first-verification` for reproduction -> `controlled-implementation` -> `test-first-verification` for regression proof.
 - Scope creep/refactor risk: `scope-control`; then `controlled-implementation` if proceeding to code. In review, route scope drift through `review-router` -> `review-ai-quality`.
-- Architecture decision: `adr-review`.
+- Hard-to-reverse architecture decision or ADR need: `adr-review`.
 - Diff/PR/generated code review: `review-router` -> required gates -> `review-final-merge-gate`.
 - MR/PR README, PR explanation, or durable change-context documentation: `mr-readme-generation`.
 - Handoff: `handoff-generation`.
