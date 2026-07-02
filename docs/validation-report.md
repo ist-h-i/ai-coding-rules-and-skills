@@ -4,8 +4,8 @@ Static packaging checks. This does not prove runtime behavior; it catches drift 
 
 ## Manifest / directory consistency
 
-- Skills in manifest: 22
-- Skill directories: 22
+- Skills in manifest: 25
+- Skill directories: 25
 - Missing directories: none
 - Extra directories: none
 
@@ -21,16 +21,19 @@ Static packaging checks. This does not prove runtime behavior; it catches drift 
 - `skills/handoff-generation/SKILL.md`: words=320, name_ok=True, missing=none
 - `skills/mr-readme-generation/SKILL.md`: words=1010, name_ok=True, missing=none
 - `skills/planning-with-files/SKILL.md`: words=342, name_ok=True, missing=none
-- `skills/repository-orientation/SKILL.md`: words=325, name_ok=True, missing=none
-- `skills/review-ai-quality/SKILL.md`: words=612, name_ok=True, missing=none
+- `skills/repository-orientation/SKILL.md`: words=353, name_ok=True, missing=none
+- `skills/review-adversarial-risk/SKILL.md`: words=667, name_ok=True, missing=none
+- `skills/review-ai-quality/SKILL.md`: words=867, name_ok=True, missing=none
 - `skills/review-architecture-impact/SKILL.md`: words=854, name_ok=True, missing=none
 - `skills/review-automated-gate/SKILL.md`: words=340, name_ok=True, missing=none
+- `skills/review-context-generation/SKILL.md`: words=740, name_ok=True, missing=none
 - `skills/review-domain-impact/SKILL.md`: words=483, name_ok=True, missing=none
-- `skills/review-final-merge-gate/SKILL.md`: words=787, name_ok=True, missing=none
-- `skills/review-router/SKILL.md`: words=993, name_ok=True, missing=none
+- `skills/review-final-merge-gate/SKILL.md`: words=848, name_ok=True, missing=none
+- `skills/review-output-quality/SKILL.md`: words=665, name_ok=True, missing=none
+- `skills/review-router/SKILL.md`: words=1110, name_ok=True, missing=none
 - `skills/risk-gate/SKILL.md`: words=416, name_ok=True, missing=none
-- `skills/scope-control/SKILL.md`: words=338, name_ok=True, missing=none
-- `skills/skill-router/SKILL.md`: words=808, name_ok=True, missing=none
+- `skills/scope-control/SKILL.md`: words=342, name_ok=True, missing=none
+- `skills/skill-router/SKILL.md`: words=845, name_ok=True, missing=none
 - `skills/spec-driven-development/SKILL.md`: words=365, name_ok=True, missing=none
 - `skills/test-first-verification/SKILL.md`: words=364, name_ok=True, missing=none
 
@@ -42,6 +45,7 @@ Static packaging checks. This does not prove runtime behavior; it catches drift 
 - `CUSTOM_INSTRUCTIONS.md`: ok
 - `CHANGELOG.md`: ok
 - `docs/skill-matrix.md`: ok
+- `docs/ai/review-context.md`: ok
 - `docs/usage-ja.md`: ok
 - `docs/workflow-examples.md`: ok
 - `docs/project-overlay-template.md`: ok

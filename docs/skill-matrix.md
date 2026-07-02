@@ -12,10 +12,11 @@ This matrix is a reference view of the canonical runtime routes in `skills/skill
 | New feature or user-visible behavior | `spec-driven-development` | `controlled-implementation` -> `test-first-verification` | Spec, scoped implementation, verification evidence |
 | Clear non-trivial implementation | `controlled-implementation` | `test-first-verification` | Minimal scoped implementation summary |
 | Multi-step task likely to span sessions | `planning-with-files` | `handoff-generation` | Durable planning state and next task |
-| Risk of scope creep/refactor sprawl | `scope-control` | `controlled-implementation` if proceeding to code; review phase uses `review-router` -> `review-ai-quality` | Scope contract, scoped implementation path, or review route |
+| Risk of scope creep/refactor sprawl | `scope-control` | `controlled-implementation` if proceeding to code; review phase uses `review-router` -> required gates, with scope findings generally routed to `review-ai-quality` | Scope contract, scoped implementation path, or review route |
 | Bug, regression, or unknown root cause | `doubt-driven-development` | `test-first-verification` for reproduction -> `controlled-implementation` -> `test-first-verification` for regression proof | Hypothesis, reproduction evidence, scoped fix, regression proof |
 | Hard-to-reverse architecture decision or ADR need | `adr-review` | `grill-with-docs`; `application-boundary-architecture` if boundary mechanics are unresolved | ADR action and decision record |
-| PR/diff/commit review | `review-router` | `review-architecture-impact` when structural or boundary impact may exist; `review-final-merge-gate` for the final decision | Layer applicability, required gates, gate evidence, and merge decision |
+| PR/diff/commit review | `review-router` | `review-architecture-impact` when structural or boundary impact may exist; `review-output-quality` when consumer-facing or machine-consumed output may change; `review-adversarial-risk` when severe failure paths or blast radius may exist; `review-final-merge-gate` for the final decision | Layer applicability, required gates, gate evidence, and merge decision |
+| Repeated review context setup | `review-context-generation` | `repository-orientation` for repo facts before drafting context | Durable review context with evidence-status-labeled claims |
 | MR/PR README, PR explanation, or durable change-context documentation | `mr-readme-generation` | `adr-review` | Durable change context for human review and future AI reuse |
 | Performance/security/reliability/readiness claim | `evidence-ledger` | `doubt-driven-development` | Claim/evidence/status table |
 | End of work or passing to another agent | `handoff-generation` | `evidence-ledger` | Executable next task and residual risk |
@@ -51,7 +52,10 @@ Application boundary:
 application-boundary-architecture -> adr-review when the decision is hard to reverse or should be recorded
 
 Review:
-review-router -> layer applicability -> required gates, including review-architecture-impact when needed -> review-final-merge-gate
+review-router -> layer applicability -> required gates, including review-architecture-impact, review-output-quality, and review-adversarial-risk when needed -> review-final-merge-gate
+
+Review context:
+review-context-generation -> docs/ai/review-context.md
 
 MR/PR change-context README:
 mr-readme-generation -> adr-review when hard-to-reverse decisions appear

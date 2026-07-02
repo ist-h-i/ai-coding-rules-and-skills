@@ -34,6 +34,7 @@ Understand enough of the repository to avoid random edits, invented conventions,
    - docs/
    - ADRs
    - CONTRIBUTING or coding standards
+   - `docs/ai/review-context.md` when repeated reviews or review gates are expected
    - context maps, schema docs, API docs
    - ownership/module-boundary hints
 
@@ -54,6 +55,8 @@ Understand enough of the repository to avoid random edits, invented conventions,
    - generated/vendored files to avoid
 
 5. Record only decision-relevant findings. Do not create a repository encyclopedia.
+
+6. Recommend `review-context-generation` when repeated MR/PR reviews, output-quality review, adversarial review, accepted-risk suppression, or known-issue suppression are expected.
 
 ## Output
 

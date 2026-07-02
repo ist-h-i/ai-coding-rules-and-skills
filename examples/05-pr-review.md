@@ -11,7 +11,7 @@ Review this PR and tell me whether to merge.
 Use:
 
 ```text
-review-router → layer applicability → required gates → review-final-merge-gate
+review-router → layer applicability → required gates, including review-architecture-impact, review-output-quality, and review-adversarial-risk when applicable → review-final-merge-gate
 ```
 
 ## Expected output
@@ -35,9 +35,9 @@ Layer applicability:
   reason: CSV escaping correctness and edge cases determine whether the output is valid.
   gate: review-ai-quality
 - Output quality:
-  status: insufficient evidence
-  reason: Output quality requires the planned `review-output-quality` gate, which is not available in this package version.
-  gate:
+  status: required
+  reason: CSV export is a human-facing and system-consumed output contract.
+  gate: review-output-quality
 - Test / verification:
   status: required
   reason: The escaping behavior needs regression coverage.
@@ -64,10 +64,9 @@ Layer applicability:
   gate: evidence-ledger
 
 Review route:
-- Required gates: review-automated-gate, review-ai-quality, review-final-merge-gate
-- Pending specialized gates: review-output-quality
+- Required gates: review-automated-gate, review-ai-quality, review-output-quality, review-final-merge-gate
 - Optional gates: evidence-ledger
-- Skipped gates: review-architecture-impact, review-domain-impact, adr-review, risk-gate
+- Skipped gates: review-architecture-impact, review-domain-impact, review-adversarial-risk, adr-review, risk-gate
 
 Decision:
 - request changes
@@ -77,7 +76,7 @@ Layer summary:
 - Architecture: skipped; no public API, dependency, persistence, or deployment boundary changed.
 - Design: pass; change stays inside the existing export path.
 - Logic: fail; quote escaping is missing for CSV fields.
-- Output quality: insufficient evidence; the planned review-output-quality gate is not available in this package version.
+- Output quality: fail; the CSV output contract is not parseable for fields containing quotes.
 - Test / verification: insufficient evidence; comma coverage exists, but double-quote regression coverage is missing.
 - Style / maintainability: pass; local implementation shape matches nearby code.
 - Mechanical: pass; focused tests ran, except large-file benchmark was not run.

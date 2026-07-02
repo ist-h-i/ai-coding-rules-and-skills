@@ -63,7 +63,7 @@ Diff budget:
 
 5. During implementation and review, flag out-of-scope changes.
    - If proceeding to code, hand the scope contract to `controlled-implementation`.
-   - If reviewing a diff, route scope drift through `review-router` -> `review-ai-quality`.
+   - If reviewing a diff, use `review-router` -> required gates; scope findings generally route to `review-ai-quality`.
 
 ## Output
 

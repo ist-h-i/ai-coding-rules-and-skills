@@ -35,6 +35,7 @@ README.md
 README.ja.md
 CHANGELOG.md
 docs/
+  ai/review-context.md
   skill-matrix.md
   usage-ja.md
   workflow-examples.md
@@ -63,10 +64,13 @@ skills/
   controlled-implementation/SKILL.md
   test-first-verification/SKILL.md
   review-router/SKILL.md
+  review-adversarial-risk/SKILL.md
   review-automated-gate/SKILL.md
   review-ai-quality/SKILL.md
   review-architecture-impact/SKILL.md
+  review-context-generation/SKILL.md
   review-domain-impact/SKILL.md
+  review-output-quality/SKILL.md
   review-final-merge-gate/SKILL.md
   risk-gate/SKILL.md
   adr-review/SKILL.md
@@ -99,9 +103,10 @@ For tools that only support a single custom instruction field, use `CUSTOM_INSTR
 | 実装前に未解決のアプリケーション境界・依存方向・DTO/Error/async lifetime判断 | `application-boundary-architecture` → 通常の実装ルートへ戻る |
 | 新機能・挙動変更 | `spec-driven-development` → `controlled-implementation` → `test-first-verification` |
 | バグ・原因不明 | `doubt-driven-development` → `test-first-verification` for reproduction → `controlled-implementation` → `test-first-verification` for regression proof |
-| スコープが広がりそう | `scope-control`（実装へ進むなら `controlled-implementation`、レビューでは `review-router` → `review-ai-quality`） |
+| スコープが広がりそう | `scope-control`（実装へ進むなら `controlled-implementation`、レビューでは `review-router` → required gates） |
 | 危険操作・外部影響 | `risk-gate` before the selected workflow proceeds to action |
-| PR/diffレビュー | `review-router` → layer applicability → required gates（architecture impact は `review-architecture-impact`）→ `review-final-merge-gate` |
+| PR/diffレビュー | `review-router` → layer applicability → required gates（architecture impact は `review-architecture-impact`、output quality は `review-output-quality`、adversarial risk は `review-adversarial-risk`）→ `review-final-merge-gate` |
+| 繰り返しレビュー文脈の固定 | `review-context-generation`（既定: `docs/ai/review-context.md`） |
 | MR/PR README・PR説明・変更文脈固定 | `mr-readme-generation` |
 | 次のAgentへ渡す | `handoff-generation` |
 
@@ -110,6 +115,7 @@ Use `evidence-ledger` whenever final text makes or evaluates a claim about corre
 ## What changed from v1
 
 - Added `application-boundary-architecture` for unresolved framework-agnostic boundary, dependency direction, DTO/error trust boundary, async lifetime, feature public API, and architecture guard decisions before returning to the normal implementation route.
+- Added `review-context-generation`, `review-output-quality`, and `review-adversarial-risk` so context-heavy review layers have dedicated gates instead of being collapsed into AI quality review.
 - Added `Safety and External Effects` to the kernel.
 - Added a minimal routing gate inside `AGENTS.md` that sends non-trivial workflow selection to `skill-router`.
 - Added `risk-gate` for destructive, irreversible, external, production, auth, secret, billing, dependency, and infra risks.

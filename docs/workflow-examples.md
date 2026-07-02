@@ -138,7 +138,7 @@ Workflow:
 ```text
 review-router
 layer applicability
-required gates, including review-architecture-impact when architecture impact may exist
+required gates, including review-architecture-impact, review-output-quality, and review-adversarial-risk when applicable
 review-final-merge-gate
 ```
 
