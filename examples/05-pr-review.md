@@ -35,9 +35,9 @@ Layer applicability:
   reason: CSV escaping correctness and edge cases determine whether the output is valid.
   gate: review-ai-quality
 - Output quality:
-  status: required
-  reason: The generated CSV is consumed outside the system and must remain parseable.
-  gate: review-ai-quality
+  status: insufficient evidence
+  reason: Output quality requires the planned `review-output-quality` gate, which is not available in this package version.
+  gate:
 - Test / verification:
   status: required
   reason: The escaping behavior needs regression coverage.
@@ -65,6 +65,7 @@ Layer applicability:
 
 Review route:
 - Required gates: review-automated-gate, review-ai-quality, review-final-merge-gate
+- Pending specialized gates: review-output-quality
 - Optional gates: evidence-ledger
 - Skipped gates: review-architecture-impact, review-domain-impact, adr-review, risk-gate
 
@@ -76,7 +77,7 @@ Layer summary:
 - Architecture: skipped; no public API, dependency, persistence, or deployment boundary changed.
 - Design: pass; change stays inside the existing export path.
 - Logic: fail; quote escaping is missing for CSV fields.
-- Output quality: fail; generated CSV can be malformed for quoted values.
+- Output quality: insufficient evidence; the planned review-output-quality gate is not available in this package version.
 - Test / verification: insufficient evidence; comma coverage exists, but double-quote regression coverage is missing.
 - Style / maintainability: pass; local implementation shape matches nearby code.
 - Mechanical: pass; focused tests ran, except large-file benchmark was not run.
