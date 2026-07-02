@@ -95,6 +95,22 @@ adr-review
 grill-with-docs を使って、既存docs/ADR/用語体系とこの設計案の衝突を確認してください。
 ```
 
+### アプリケーション境界判断
+
+使うSkill:
+
+```text
+application-boundary-architecture
+adr-review if hard-to-reverse or record-worthy
+grill-with-docs if docs/domain/ADR terms matter
+```
+
+例:
+
+```text
+application-boundary-architecture を使って、この変更で facade / usecase / repository / mapper / port のどこまで必要かを、既存repo構成に合わせて判断してください。境界違反、最小変更、検証方法も出してください。
+```
+
 ### バグ・原因不明
 
 使うSkill:

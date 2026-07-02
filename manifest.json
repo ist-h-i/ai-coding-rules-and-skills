@@ -1,12 +1,13 @@
 {
   "name": "ai-coding-kernel-skills",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "created": "2026-06-15",
   "target_use": "personal development and internal team introduction",
   "kernel": "AGENTS.md",
   "copy_paste_kernel": "CUSTOM_INSTRUCTIONS.md",
   "skills": [
     "adr-review",
+    "application-boundary-architecture",
     "code-review-quality",
     "controlled-implementation",
     "doubt-driven-development",

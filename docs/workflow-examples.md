@@ -102,7 +102,30 @@ Expected behavior:
 - Answer from repo/docs where possible.
 - Produce decision summary, non-goals, acceptance criteria, and failure modes.
 
-## 5. PR review
+## 5. Application boundary decision
+
+User request:
+
+```text
+This feature fetches account settings, updates local workflow state, and maps API errors. Decide where the facade/usecase/repository/mapper boundaries should live.
+```
+
+Workflow:
+
+```text
+application-boundary-architecture
+adr-review if hard-to-reverse or record-worthy
+grill-with-docs if docs/domain/ADR terms matter
+```
+
+Expected behavior:
+
+- Inspect touched files, direct imports, nearby tests, public APIs, data access patterns, and error handling.
+- Decide the smallest boundary that separates ownership, side effects, DTO/error trust boundaries, and async lifetime.
+- Avoid adding pass-through layers that name no real policy.
+- Report boundary decision, violations, smallest compatible change, and verification.
+
+## 6. PR review
 
 User request:
 
@@ -144,7 +167,7 @@ Residual risk:
 - ...
 ```
 
-## 6. Handoff to another agent
+## 7. Handoff to another agent
 
 User request:
 
@@ -173,7 +196,7 @@ Do not:
 Stop and ask if:
 ```
 
-## 7. MR/PR README generation
+## 8. MR/PR README generation
 
 User request:
 

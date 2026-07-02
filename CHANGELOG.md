@@ -1,5 +1,15 @@
 # Changelog
 
+## v2.3.0
+
+Purpose: add a framework-agnostic application boundary workflow for architecture decisions that are too concrete for ADR-only routing.
+
+Changes:
+
+- Added `application-boundary-architecture`.
+- Routed boundary, dependency direction, state ownership, external I/O, DTO/error trust boundary, async lifetime, feature public API, usecase/repository/port/adapter/mapper, ID boundary, and architecture guard decisions to the new skill.
+- Updated manifest, README files, usage docs, workflow examples, skill matrix, custom instructions, and validation report.
+
 ## v2.2.0
 
 Purpose: add a non-evaluative MR documentation workflow that turns merge requests into reusable specification context.
