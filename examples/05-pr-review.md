@@ -37,7 +37,7 @@ Layer applicability:
 - Output quality:
   status: required
   reason: The generated CSV is consumed outside the system and must remain parseable.
-  gate: review-ai-quality
+  gate: review-output-quality
 - Test / verification:
   status: required
   reason: The escaping behavior needs regression coverage.
@@ -64,9 +64,9 @@ Layer applicability:
   gate: evidence-ledger
 
 Review route:
-- Required gates: review-automated-gate, review-ai-quality, review-final-merge-gate
+- Required gates: review-automated-gate, review-ai-quality, review-output-quality, review-final-merge-gate
 - Optional gates: evidence-ledger
-- Skipped gates: review-architecture-impact, review-domain-impact, adr-review, risk-gate
+- Skipped gates: review-architecture-impact, review-domain-impact, review-adversarial-risk, adr-review, risk-gate
 
 Decision:
 - request changes
