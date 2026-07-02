@@ -137,6 +137,7 @@ Workflow:
 
 ```text
 review-router
+layer applicability
 required gates
 review-final-merge-gate
 ```
@@ -177,6 +178,9 @@ Layer summary:
 
 Required fixes:
 - [severity] file:line — issue, evidence, required fix
+
+Suggestions:
+- ...
 
 Evidence reviewed:
 - ...
